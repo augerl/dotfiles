@@ -1,11 +1,21 @@
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/sh
-sudo apt install tmux -y
-git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
-~/.config/tmux/plugins/tpm/bin/install_plugins
+# Check if the directory does not exist
+if [ ! -d "$HOME/.config/tmux/plugins/tpm" ]; then
+  sudo apt install tmux -y
+  git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+  ~/.config/tmux/plugins/tpm/bin/install_plugins
+else
+  echo "Directory ~/.config/tmux/plugins/tpm already exists. Skipping installation."
+fi
 {{ else if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
 brew install tmux
-git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
-~/.config/tmux/plugins/tpm/bin/install_plugins'"
+if [ ! -d "$HOME/.config/tmux/plugins/tpm" ]; then
+  sudo apt install tmux -y
+  git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+  ~/.config/tmux/plugins/tpm/bin/install_plugins
+else
+  echo "Directory ~/.config/tmux/plugins/tpm already exists. Skipping installation."
+fi
 {{ end -}}
