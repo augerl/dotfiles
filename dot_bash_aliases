@@ -65,6 +65,6 @@ if command -v micro &> /dev/null; then
 fi
 
 # Automatically start tmux if not already inside a tmux session
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-  tmux attach-session -t default || tmux new-session -s default
+if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
+    exec tmux new-session -A -s ${USER} >/dev/null 2>&1
 fi
