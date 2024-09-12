@@ -64,7 +64,7 @@ if command -v micro &> /dev/null; then
     alias nano='micro'
 fi
 
-# Automatically start tmux if not already inside a tmux session
-if [ -x "$(command -v tmux)" ] && [ -n "${DISPLAY}" ] && [ -z "${TMUX}" ]; then
-    exec tmux new-session -A -s ${USER} >/dev/null 2>&1
+# Automatically start tmux in ssh sessions
+if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]]; then
+  tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
 fi
