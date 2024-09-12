@@ -63,3 +63,8 @@ alias shutdown="sudo shutdown -h 0"
 if command -v micro &> /dev/null; then
     alias nano='micro'
 fi
+
+# Automatically start tmux if not already inside a tmux session
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+  tmux attach-session -t default || tmux new-session -s default
+fi
