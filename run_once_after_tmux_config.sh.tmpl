@@ -1,0 +1,11 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+sudo apt install tmux
+git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+~/.config/tmux/plugins/tpm/bin/install_plugins
+{{ else if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+brew install tmux
+git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+~/.config/tmux/plugins/tpm/bin/install_plugins'"
+{{ end -}}
