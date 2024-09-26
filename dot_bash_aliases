@@ -24,8 +24,8 @@ alias upgrade="sudo apt upgrade -y"
 alias upup="sudo update && sudo apt upgrade -y"
 
 # Docker
-alias dstop='sudo docker stop $(sudo docker ps -a -q)' # usage: dstop container_name
-alias drm='sudo docker rm $(sudo docker ps -a -q)' # usage: drm container_name
+alias dstop='sudo docker stop' # usage: dstop container_name
+alias drm='sudo docker rm' # usage: drm container_name
 alias dps='sudo docker ps -a' # running docker processes
 alias dpss='sudo docker ps -a --format "table {{.Names}}\t{{.State}}\t{{.Status}}\t{{.Image}}" | (sed -u 1q; sort)' # running docker processes as nicer table
 alias dprunevol='sudo docker volume prune' # remove unused volumes
